@@ -30,12 +30,14 @@ export const useRecords = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
   }, [records]);
 
-  // Filter records based on search query
+  // Filter records based on search query, sorted by most recent first
   const filteredRecords = useMemo(() => {
-    if (!searchQuery.trim()) return records;
+    const sorted = [...records].sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+    
+    if (!searchQuery.trim()) return sorted;
     
     const searchTags = searchQuery.toLowerCase().split(/\s+/).filter(Boolean);
-    return records.filter(record =>
+    return sorted.filter(record =>
       searchTags.every(searchTag =>
         record.tags.some(tag => tag.toLowerCase().includes(searchTag))
       )

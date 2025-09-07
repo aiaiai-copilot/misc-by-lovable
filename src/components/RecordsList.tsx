@@ -12,22 +12,6 @@ interface RecordsListProps {
 export const RecordsList = ({ records, onEdit, onDelete }: RecordsListProps) => {
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  const formatTimeAgo = (date: Date) => {
-    const now = new Date();
-    const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
-    
-    if (diffInMinutes < 1) return 'just now';
-    if (diffInMinutes < 60) return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
-    
-    const diffInHours = Math.floor(diffInMinutes / 60);
-    if (diffInHours < 24) return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
-    
-    const diffInDays = Math.floor(diffInHours / 24);
-    if (diffInDays < 7) return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
-    
-    return date.toLocaleDateString();
-  };
-
   const handleRecordClick = (record: Record) => {
     if (editingId !== record.id) {
       setEditingId(record.id);
@@ -55,13 +39,10 @@ export const RecordsList = ({ records, onEdit, onDelete }: RecordsListProps) => 
           )}
           onClick={() => handleRecordClick(record)}
         >
-          <div className="flex items-start justify-between">
+          <div className="flex items-center justify-between">
             <div className="flex-1">
-              <div className="text-foreground font-medium mb-1">
+              <div className="text-foreground font-medium">
                 {record.tags.join(' ')}
-              </div>
-              <div className="text-secondary text-sm">
-                {formatTimeAgo(record.updatedAt)}
               </div>
             </div>
             
