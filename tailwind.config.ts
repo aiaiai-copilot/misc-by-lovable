@@ -57,6 +57,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        hover: {
+          bg: "hsl(var(--hover-bg))",
+        },
+        inputBorder: "hsl(var(--input-border))",
+        inputFocus: "hsl(var(--input-focus))",
       },
       borderRadius: {
         lg: "var(--radius)",
