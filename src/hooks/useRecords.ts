@@ -42,11 +42,11 @@ export const useRecords = () => {
     );
   }, [records, searchQuery]);
 
-  // Get tag frequencies for tag cloud
+  // Get tag frequencies for tag cloud (based on all records, not filtered)
   const tagFrequencies = useMemo(() => {
     const frequencies = new Map<string, number>();
     
-    filteredRecords.forEach(record => {
+    records.forEach(record => {
       record.tags.forEach(tag => {
         frequencies.set(tag, (frequencies.get(tag) || 0) + 1);
       });
@@ -55,7 +55,7 @@ export const useRecords = () => {
     return Array.from(frequencies.entries())
       .map(([tag, count]) => ({ tag, count }))
       .sort((a, b) => b.count - a.count);
-  }, [filteredRecords]);
+  }, [records]);
 
   // Get all unique tags for autocomplete
   const allTags = useMemo(() => {
