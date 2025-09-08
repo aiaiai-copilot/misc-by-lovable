@@ -37,11 +37,12 @@ export const useRecords = () => {
     if (!searchQuery.trim()) return sorted;
     
     const searchTags = searchQuery.toLowerCase().split(/\s+/).filter(Boolean);
-    return sorted.filter(record =>
-      searchTags.every(searchTag =>
-        record.tags.some(tag => tag.toLowerCase().includes(searchTag))
-      )
-    );
+    return sorted.filter(record => {
+      const recordTags = record.tags.map(tag => tag.toLowerCase());
+      return searchTags.every(searchTag =>
+        recordTags.includes(searchTag)
+      );
+    });
   }, [records, searchQuery]);
 
   // Get tag frequencies for tag cloud (based on all records, not filtered)

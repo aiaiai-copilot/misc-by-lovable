@@ -18,7 +18,7 @@ export const RecordsList = ({ records, onEdit, onDelete, searchQuery = '' }: Rec
     
     const searchLower = searchTerms.map(term => term.toLowerCase());
     return tags.map((tag, index) => {
-      const isHighlighted = searchLower.some(searchTerm => tag.toLowerCase().includes(searchTerm));
+      const isHighlighted = searchLower.includes(tag.toLowerCase());
       return (
         <span
           key={index}
