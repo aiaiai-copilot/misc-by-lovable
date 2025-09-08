@@ -33,7 +33,23 @@ export const MiscInput = ({
 
     if (e.key === 'Escape') {
       e.preventDefault();
-      onEscape();
+      
+      // Clear last tag or partial tag
+      const trimmedValue = value.trim();
+      if (!trimmedValue) {
+        // No content, call original escape behavior
+        onEscape();
+        return;
+      }
+      
+      const lastSpaceIndex = value.lastIndexOf(' ');
+      if (lastSpaceIndex >= 0) {
+        // Remove everything after the last space (partial or complete tag)
+        onChange(value.substring(0, lastSpaceIndex + 1));
+      } else {
+        // No spaces, clear entire input
+        onChange('');
+      }
     }
   };
 
