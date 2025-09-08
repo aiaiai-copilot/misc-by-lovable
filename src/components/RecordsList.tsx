@@ -23,7 +23,7 @@ export const RecordsList = ({ records, onEdit, onDelete, searchQuery = '' }: Rec
         <span
           key={index}
           className={cn(
-            isHighlighted && "bg-background/20 px-1 rounded"
+            isHighlighted && "font-bold"
           )}
         >
           {tag}{index < tags.length - 1 ? ' ' : ''}
