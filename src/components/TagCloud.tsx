@@ -90,6 +90,12 @@ export const TagCloud = forwardRef<TagCloudRef, TagCloudProps>(({ tagFrequencies
         e.preventDefault();
         onTagClick(tagFrequencies[index].tag);
         break;
+      case 'Escape':
+        e.preventDefault();
+        if (onNavigateUp) {
+          onNavigateUp();
+        }
+        break;
     }
   };
   

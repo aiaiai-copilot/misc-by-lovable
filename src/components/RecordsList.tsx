@@ -53,6 +53,12 @@ export const RecordsList = forwardRef<RecordsListRef, RecordsListProps>(({ recor
         e.preventDefault();
         onDelete(records[index].id);
         break;
+      case 'Escape':
+        e.preventDefault();
+        if (onNavigateUp) {
+          onNavigateUp();
+        }
+        break;
     }
   };
 
