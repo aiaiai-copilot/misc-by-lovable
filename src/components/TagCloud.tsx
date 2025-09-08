@@ -1,6 +1,6 @@
 import { TagFrequency } from '@/types/Record';
 import { cn } from '@/lib/utils';
-import { useRef, useEffect, KeyboardEvent, forwardRef, useImperativeHandle } from 'react';
+import { useRef, useEffect, KeyboardEvent, forwardRef, useImperativeHandle, useState } from 'react';
 
 interface TagCloudProps {
   tagFrequencies: TagFrequency[];
@@ -15,7 +15,29 @@ export interface TagCloudRef {
 export const TagCloud = forwardRef<TagCloudRef, TagCloudProps>(({ tagFrequencies, onTagClick, onNavigateUp }, ref) => {
   const maxCount = Math.max(...tagFrequencies.map(t => t.count));
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const gridCols = 8; // xl:grid-cols-8
+  const [gridCols, setGridCols] = useState(8);
+
+  // Update grid columns based on screen size
+  useEffect(() => {
+    const updateGridCols = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setGridCols(2); // grid-cols-2
+      } else if (width < 768) {
+        setGridCols(3); // sm:grid-cols-3
+      } else if (width < 1024) {
+        setGridCols(4); // md:grid-cols-4
+      } else if (width < 1280) {
+        setGridCols(6); // lg:grid-cols-6
+      } else {
+        setGridCols(8); // xl:grid-cols-8
+      }
+    };
+
+    updateGridCols();
+    window.addEventListener('resize', updateGridCols);
+    return () => window.removeEventListener('resize', updateGridCols);
+  }, []);
 
   useImperativeHandle(ref, () => ({
     focusFirst: () => {
