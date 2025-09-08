@@ -1,5 +1,6 @@
 import { useRef, KeyboardEvent, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
+import { X } from 'lucide-react';
 
 interface MiscInputProps {
   value: string;
@@ -63,6 +64,10 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
     }
   };
 
+  const handleClear = () => {
+    onChange('');
+  };
+
   return (
     <div className={cn("relative w-full", className)}>
       <input
@@ -72,9 +77,18 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="calculator-input w-full text-center"
+        className="calculator-input w-full text-center pr-10"
         autoFocus
       />
+      {value.trim() && (
+        <button
+          onClick={handleClear}
+          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-muted transition-colors"
+          type="button"
+        >
+          <X size={16} className="text-muted-foreground hover:text-foreground" />
+        </button>
+      )}
     </div>
   );
 });
