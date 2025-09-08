@@ -121,14 +121,11 @@ const Index = () => {
 
         {/* Display based on state */}
         {showTagCloud && (
-          <div>
-            <h2 className="text-xl font-light text-center mb-6">Поиск - облако тегов</h2>
-            <div className="results-area">
-              <TagCloud
-                tagFrequencies={tagFrequencies}
-                onTagClick={handleTagClick}
-              />
-            </div>
+          <div className="results-area">
+            <TagCloud
+              tagFrequencies={tagFrequencies}
+              onTagClick={handleTagClick}
+            />
           </div>
         )}
 
