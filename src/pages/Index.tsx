@@ -110,14 +110,6 @@ const Index = () => {
             placeholder={editingRecord ? "Edit tags..." : "Enter tags separated by spaces..."}
             className="w-full"
           />
-          
-          {editingRecord && (
-            <div className="text-center mt-2">
-              <span className="text-xs text-muted-foreground">
-                Editing record • Press Escape to cancel
-              </span>
-            </div>
-          )}
         </div>
 
         {/* Display based on state */}
@@ -142,13 +134,10 @@ const Index = () => {
         )}
 
         {showCreateState && (
-          <div>
-            <h2 className="text-xl font-light text-center mb-6">Создание записи</h2>
-            <div className="results-area">
-              <div className="text-center py-16">
-                <div className="text-lg text-muted-foreground">No records found</div>
-                <div className="text-sm mt-2 text-muted-foreground/70">Press Enter to create a new record</div>
-              </div>
+          <div className="results-area">
+            <div className="text-center py-16">
+              <div className="text-lg text-muted-foreground">No records found</div>
+              <div className="text-sm mt-2 text-muted-foreground/70">Press Enter to create a new record</div>
             </div>
           </div>
         )}
