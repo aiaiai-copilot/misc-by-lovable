@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRecords } from '@/hooks/useRecords';
 import { MiscInput } from '@/components/MiscInput';
-import { RecordsList } from '@/components/RecordsList';
-import { TagCloud } from '@/components/TagCloud';
+import { RecordsList, type RecordsListRef } from '@/components/RecordsList';
+import { TagCloud, type TagCloudRef } from '@/components/TagCloud';
 import { Record } from '@/types/Record';
 import { useToast } from '@/hooks/use-toast';
 
@@ -21,6 +21,11 @@ const Index = () => {
   const [inputValue, setInputValue] = useState('');
   const [editingRecord, setEditingRecord] = useState<Record | null>(null);
   const { toast } = useToast();
+  
+  // Refs for navigation
+  const inputRef = useRef<HTMLInputElement>(null);
+  const tagCloudRef = useRef<TagCloudRef>(null);
+  const recordsListRef = useRef<RecordsListRef>(null);
 
   // Debounced search
   useEffect(() => {
@@ -80,6 +85,20 @@ const Index = () => {
   const handleTagClick = (tag: string) => {
     const newValue = inputValue.trim() ? `${inputValue} ${tag}` : tag;
     setInputValue(newValue);
+    // Focus back to input after tag click
+    setTimeout(() => inputRef.current?.focus(), 0);
+  };
+
+  const handleNavigateToResults = () => {
+    if (showTagCloud) {
+      tagCloudRef.current?.focusFirst();
+    } else if (showRecordsList) {
+      recordsListRef.current?.focusFirst();
+    }
+  };
+
+  const handleNavigateToInput = () => {
+    inputRef.current?.focus();
   };
 
   const handleDelete = (id: string) => {
@@ -102,10 +121,12 @@ const Index = () => {
         {/* Input Field */}
         <div className="mb-4 w-full max-w-6xl mx-auto">
           <MiscInput
+            ref={inputRef}
             value={inputValue}
             onChange={setInputValue}
             onSubmit={handleSubmit}
             onEscape={handleEscape}
+            onNavigateDown={handleNavigateToResults}
             allTags={allTags}
             placeholder={editingRecord ? "Edit tags..." : "Enter tags separated by spaces..."}
             className="w-full"
@@ -116,8 +137,10 @@ const Index = () => {
         {showTagCloud && (
           <div className="results-area">
             <TagCloud
+              ref={tagCloudRef}
               tagFrequencies={tagFrequencies}
               onTagClick={handleTagClick}
+              onNavigateUp={handleNavigateToInput}
             />
           </div>
         )}
@@ -125,9 +148,11 @@ const Index = () => {
         {showRecordsList && (
           <div className="results-area">
             <RecordsList
+              ref={recordsListRef}
               records={filteredRecords}
               onEdit={handleEdit}
               onDelete={handleDelete}
+              onNavigateUp={handleNavigateToInput}
               searchQuery={inputValue}
             />
           </div>

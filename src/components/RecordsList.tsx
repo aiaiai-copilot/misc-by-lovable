@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, KeyboardEvent, forwardRef, useImperativeHandle } from 'react';
 import { Record } from '@/types/Record';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -8,10 +8,53 @@ interface RecordsListProps {
   onEdit: (record: Record) => void;
   onDelete: (id: string) => void;
   searchQuery?: string;
+  onNavigateUp?: () => void;
 }
 
-export const RecordsList = ({ records, onEdit, onDelete, searchQuery = '' }: RecordsListProps) => {
+export interface RecordsListRef {
+  focusFirst: () => void;
+}
+
+export const RecordsList = forwardRef<RecordsListRef, RecordsListProps>(({ records, onEdit, onDelete, searchQuery = '', onNavigateUp }, ref) => {
   const [editingId, setEditingId] = useState<string | null>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useImperativeHandle(ref, () => ({
+    focusFirst: () => {
+      if (itemRefs.current[0]) {
+        itemRefs.current[0].focus();
+      }
+    }
+  }));
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>, index: number) => {
+    switch (e.key) {
+      case 'ArrowUp':
+        e.preventDefault();
+        if (index > 0) {
+          itemRefs.current[index - 1]?.focus();
+        } else if (onNavigateUp) {
+          onNavigateUp();
+        }
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        if (index < records.length - 1) {
+          itemRefs.current[index + 1]?.focus();
+        }
+        break;
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        handleRecordClick(records[index]);
+        break;
+      case 'Delete':
+      case 'Backspace':
+        e.preventDefault();
+        onDelete(records[index].id);
+        break;
+    }
+  };
 
   const highlightTags = (tags: string[], searchTerms: string[]) => {
     if (!searchQuery.trim()) return tags.join(' ');
@@ -52,14 +95,17 @@ export const RecordsList = ({ records, onEdit, onDelete, searchQuery = '' }: Rec
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-2">
-      {records.slice(0, 12).map((record) => (
+      {records.slice(0, 12).map((record, index) => (
         <div
           key={record.id}
+          ref={el => itemRefs.current[index] = el}
           className={cn(
-            "record-item px-4 py-3 cursor-pointer group relative border rounded",
+            "record-item px-4 py-3 cursor-pointer group relative border rounded focus:outline-none focus:ring-2 focus:ring-ring",
             editingId === record.id && "bg-muted"
           )}
           onClick={() => handleRecordClick(record)}
+          onKeyDown={(e) => handleKeyDown(e, index)}
+          tabIndex={-1}
         >
           <div className="flex items-center justify-between">
             <div className="flex-1">
@@ -83,4 +129,4 @@ export const RecordsList = ({ records, onEdit, onDelete, searchQuery = '' }: Rec
       ))}
     </div>
   );
-};
+});

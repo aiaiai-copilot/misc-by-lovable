@@ -1,13 +1,75 @@
 import { TagFrequency } from '@/types/Record';
 import { cn } from '@/lib/utils';
+import { useRef, useEffect, KeyboardEvent, forwardRef, useImperativeHandle } from 'react';
 
 interface TagCloudProps {
   tagFrequencies: TagFrequency[];
   onTagClick: (tag: string) => void;
+  onNavigateUp?: () => void;
 }
 
-export const TagCloud = ({ tagFrequencies, onTagClick }: TagCloudProps) => {
+export interface TagCloudRef {
+  focusFirst: () => void;
+}
+
+export const TagCloud = forwardRef<TagCloudRef, TagCloudProps>(({ tagFrequencies, onTagClick, onNavigateUp }, ref) => {
   const maxCount = Math.max(...tagFrequencies.map(t => t.count));
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const gridCols = 8; // xl:grid-cols-8
+
+  useImperativeHandle(ref, () => ({
+    focusFirst: () => {
+      if (buttonRefs.current[0]) {
+        buttonRefs.current[0].focus();
+      }
+    }
+  }));
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const row = Math.floor(index / gridCols);
+    const col = index % gridCols;
+    const totalRows = Math.ceil(tagFrequencies.length / gridCols);
+
+    switch (e.key) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        if (col > 0) {
+          buttonRefs.current[index - 1]?.focus();
+        }
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        if (col < gridCols - 1 && index + 1 < tagFrequencies.length) {
+          buttonRefs.current[index + 1]?.focus();
+        }
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        if (row > 0) {
+          const targetIndex = (row - 1) * gridCols + col;
+          if (targetIndex < tagFrequencies.length) {
+            buttonRefs.current[targetIndex]?.focus();
+          }
+        } else if (onNavigateUp) {
+          onNavigateUp();
+        }
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        if (row < totalRows - 1) {
+          const targetIndex = (row + 1) * gridCols + col;
+          if (targetIndex < tagFrequencies.length) {
+            buttonRefs.current[targetIndex]?.focus();
+          }
+        }
+        break;
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        onTagClick(tagFrequencies[index].tag);
+        break;
+    }
+  };
   
   const getTagSize = (count: number) => {
     const ratio = count / maxCount;
@@ -30,14 +92,17 @@ export const TagCloud = ({ tagFrequencies, onTagClick }: TagCloudProps) => {
   return (
     <div className="w-full max-w-6xl mx-auto">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2">
-        {tagFrequencies.slice(0, 50).map((item) => (
+        {tagFrequencies.slice(0, 50).map((item, index) => (
           <button
             key={item.tag}
+            ref={el => buttonRefs.current[index] = el}
             className={cn(
               "tag-cloud-item text-center",
               getTagSize(item.count)
             )}
             onClick={() => onTagClick(item.tag)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+            tabIndex={-1}
           >
             {item.tag}
           </button>
@@ -45,4 +110,4 @@ export const TagCloud = ({ tagFrequencies, onTagClick }: TagCloudProps) => {
       </div>
     </div>
   );
-};
+});

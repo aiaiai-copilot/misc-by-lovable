@@ -1,4 +1,4 @@
-import { useRef, KeyboardEvent } from 'react';
+import { useRef, KeyboardEvent, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface MiscInputProps {
@@ -6,21 +6,22 @@ interface MiscInputProps {
   onChange: (value: string) => void;
   onSubmit: (tags: string[]) => void;
   onEscape: () => void;
+  onNavigateDown?: () => void;
   placeholder?: string;
   allTags: string[];
   className?: string;
 }
 
-export const MiscInput = ({
+export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
   value,
   onChange,
   onSubmit,
   onEscape,
+  onNavigateDown,
   placeholder = "Enter tags separated by spaces...",
   allTags,
   className
-}: MiscInputProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+}, ref) => {
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -28,6 +29,13 @@ export const MiscInput = ({
       const tags = value.trim().split(/\s+/).filter(Boolean);
       if (tags.length > 0) {
         onSubmit(tags);
+      }
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (onNavigateDown) {
+        onNavigateDown();
       }
     }
 
@@ -58,7 +66,7 @@ export const MiscInput = ({
   return (
     <div className={cn("relative w-full", className)}>
       <input
-        ref={inputRef}
+        ref={ref}
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -69,4 +77,4 @@ export const MiscInput = ({
       />
     </div>
   );
-};
+});
