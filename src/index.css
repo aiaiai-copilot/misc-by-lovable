@@ -154,10 +154,18 @@ All colors MUST be HSL.
   .tag-cloud-item {
     transition: var(--transition-quick);
     cursor: pointer;
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid hsl(var(--border));
+    font-size: 14px;
+    font-weight: 500;
   }
   
   .tag-cloud-item:hover {
-    color: hsl(var(--accent));
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
     transform: translateY(-1px);
   }
   
@@ -169,26 +177,20 @@ All colors MUST be HSL.
   }
   
   .results-area {
-    background: hsl(var(--muted-foreground));
-    color: hsl(var(--background));
+    border: 1px solid hsl(var(--border));
     padding: 2rem;
-    border-radius: 8px;
-    margin-top: 2rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    background: hsl(var(--background));
   }
   
-  .results-area * {
-    color: hsl(var(--background)) !important;
-  }
-  
-  .results-area .record-item {
-    border-bottom: 1px solid hsl(var(--background) / 0.2);
-  }
-  
-  .results-area .record-item:hover {
-    background-color: hsl(var(--background) / 0.1);
+  .results-area .tag-cloud-item {
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground));
   }
   
   .results-area .tag-cloud-item:hover {
-    color: hsl(var(--background)) !important;
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
   }
 }

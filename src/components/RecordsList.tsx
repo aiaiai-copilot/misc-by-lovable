@@ -51,19 +51,19 @@ export const RecordsList = ({ records, onEdit, onDelete, searchQuery = '' }: Rec
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-0">
+    <div className="w-full max-w-4xl mx-auto space-y-2">
       {records.slice(0, 12).map((record) => (
         <div
           key={record.id}
           className={cn(
-            "record-item px-6 py-4 cursor-pointer group relative",
+            "record-item px-4 py-3 cursor-pointer group relative border rounded",
             editingId === record.id && "bg-muted"
           )}
           onClick={() => handleRecordClick(record)}
         >
           <div className="flex items-center justify-between">
             <div className="flex-1">
-              <div className="text-foreground font-medium">
+              <div className="text-foreground text-sm">
                 {highlightTags(record.tags, searchTerms)}
               </div>
             </div>

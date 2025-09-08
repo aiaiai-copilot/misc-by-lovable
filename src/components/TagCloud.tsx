@@ -28,15 +28,12 @@ export const TagCloud = ({ tagFrequencies, onTagClick }: TagCloudProps) => {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-6">
-      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 py-8">
+    <div className="w-full max-w-6xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2">
         {tagFrequencies.slice(0, 50).map((item) => (
           <button
             key={item.tag}
-            className={cn(
-              "tag-cloud-item text-foreground hover:text-accent",
-              getTagSize(item.count)
-            )}
+            className="tag-cloud-item text-center"
             onClick={() => onTagClick(item.tag)}
           >
             {item.tag}

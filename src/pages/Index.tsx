@@ -120,37 +120,50 @@ const Index = () => {
         </div>
 
         {/* Display based on state */}
-        <div className="results-area">
-          {showTagCloud && (
-            <TagCloud
-              tagFrequencies={tagFrequencies}
-              onTagClick={handleTagClick}
-            />
-          )}
-
-          {showRecordsList && (
-            <RecordsList
-              records={filteredRecords}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              searchQuery={inputValue}
-            />
-          )}
-
-          {showCreateState && (
-            <div className="text-center py-16">
-              <div className="text-lg text-background">No records found</div>
-              <div className="text-sm mt-2 text-background/70">Press Enter to create a new record</div>
+        {showTagCloud && (
+          <div>
+            <h2 className="text-xl font-light text-center mb-6">Поиск - облако тегов</h2>
+            <div className="results-area">
+              <TagCloud
+                tagFrequencies={tagFrequencies}
+                onTagClick={handleTagClick}
+              />
             </div>
-          )}
+          </div>
+        )}
 
-          {showEmptyState && (
-            <div className="text-center py-16">
-              <div className="text-lg text-background">No records yet</div>
-              <div className="text-sm mt-2 text-background/70">Start by typing some tags above</div>
+        {showRecordsList && (
+          <div>
+            <h2 className="text-xl font-light text-center mb-6">Поиск - список записей</h2>
+            <div className="results-area">
+              <RecordsList
+                records={filteredRecords}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+                searchQuery={inputValue}
+              />
             </div>
-          )}
-        </div>
+          </div>
+        )}
+
+        {showCreateState && (
+          <div>
+            <h2 className="text-xl font-light text-center mb-6">Создание записи</h2>
+            <div className="results-area">
+              <div className="text-center py-16">
+                <div className="text-lg text-muted-foreground">No records found</div>
+                <div className="text-sm mt-2 text-muted-foreground/70">Press Enter to create a new record</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showEmptyState && (
+          <div className="text-center py-16">
+            <div className="text-lg text-muted-foreground">No records yet</div>
+            <div className="text-sm mt-2 text-muted-foreground/70">Start by typing some tags above</div>
+          </div>
+        )}
       </div>
     </div>
   );
