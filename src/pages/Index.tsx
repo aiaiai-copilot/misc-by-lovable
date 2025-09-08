@@ -31,8 +31,11 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, [inputValue, setSearchQuery]);
 
-  // Determine what to show
-  const hasData = filteredRecords.length > 0 || Object.keys(tagFrequencies).length > 0;
+  // Determine display mode based on search state
+  const showTagCloud = !inputValue.trim() || filteredRecords.length > 12;
+  const showRecordsList = inputValue.trim() && filteredRecords.length > 0 && filteredRecords.length <= 12;
+  const showCreateState = inputValue.trim() && filteredRecords.length === 0;
+  const showEmptyState = !inputValue.trim() && filteredRecords.length === 0;
 
   const handleSubmit = (tags: string[]) => {
     if (editingRecord) {
@@ -116,44 +119,38 @@ const Index = () => {
           )}
         </div>
 
-        {/* Search Results */}
-        {hasData ? (
-          <div className="space-y-12">
-            {/* Tag Cloud Section */}
-            {Object.keys(tagFrequencies).length > 0 && (
-              <div>
-                <h2 className="text-xl font-light text-center mb-6">Search - Tag Cloud</h2>
-                <div className="results-area">
-                  <TagCloud
-                    tagFrequencies={tagFrequencies}
-                    onTagClick={handleTagClick}
-                  />
-                </div>
-              </div>
-            )}
+        {/* Display based on state */}
+        <div className="results-area">
+          {showTagCloud && (
+            <TagCloud
+              tagFrequencies={tagFrequencies}
+              onTagClick={handleTagClick}
+            />
+          )}
 
-            {/* Records List Section */}
-            {filteredRecords.length > 0 && (
-              <div>
-                <h2 className="text-xl font-light text-center mb-6">Search - Records List</h2>
-                <div className="results-area">
-                  <RecordsList
-                    records={filteredRecords}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        ) : (
-          !inputValue.trim() && (
+          {showRecordsList && (
+            <RecordsList
+              records={filteredRecords}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              searchQuery={inputValue}
+            />
+          )}
+
+          {showCreateState && (
             <div className="text-center py-16">
-              <div className="text-lg text-muted-foreground">No records yet</div>
-              <div className="text-sm mt-2 text-muted-foreground/70">Start by typing some tags above</div>
+              <div className="text-lg text-background">No records found</div>
+              <div className="text-sm mt-2 text-background/70">Press Enter to create a new record</div>
             </div>
-          )
-        )}
+          )}
+
+          {showEmptyState && (
+            <div className="text-center py-16">
+              <div className="text-lg text-background">No records yet</div>
+              <div className="text-sm mt-2 text-background/70">Start by typing some tags above</div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

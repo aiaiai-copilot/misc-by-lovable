@@ -7,10 +7,32 @@ interface RecordsListProps {
   records: Record[];
   onEdit: (record: Record) => void;
   onDelete: (id: string) => void;
+  searchQuery?: string;
 }
 
-export const RecordsList = ({ records, onEdit, onDelete }: RecordsListProps) => {
+export const RecordsList = ({ records, onEdit, onDelete, searchQuery = '' }: RecordsListProps) => {
   const [editingId, setEditingId] = useState<string | null>(null);
+
+  const highlightTags = (tags: string[], searchTerms: string[]) => {
+    if (!searchQuery.trim()) return tags.join(' ');
+    
+    const searchLower = searchTerms.map(term => term.toLowerCase());
+    return tags.map((tag, index) => {
+      const isHighlighted = searchLower.some(searchTerm => tag.toLowerCase().includes(searchTerm));
+      return (
+        <span
+          key={index}
+          className={cn(
+            isHighlighted && "bg-background/20 px-1 rounded"
+          )}
+        >
+          {tag}{index < tags.length - 1 ? ' ' : ''}
+        </span>
+      );
+    });
+  };
+
+  const searchTerms = searchQuery.trim().split(/\s+/).filter(Boolean);
 
   const handleRecordClick = (record: Record) => {
     if (editingId !== record.id) {
@@ -42,7 +64,7 @@ export const RecordsList = ({ records, onEdit, onDelete }: RecordsListProps) => 
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <div className="text-foreground font-medium">
-                {record.tags.join(' ')}
+                {highlightTags(record.tags, searchTerms)}
               </div>
             </div>
             
