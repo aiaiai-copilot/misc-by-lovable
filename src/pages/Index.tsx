@@ -69,17 +69,23 @@ const Index = () => {
         });
       }
     }
+    // Focus back to input after submit
+    setTimeout(() => inputRef.current?.focus(), 0);
   };
 
   const handleEdit = (record: Record) => {
     setEditingRecord(record);
     setInputValue(record.tags.join(' '));
+    // Focus input after setting edit mode
+    setTimeout(() => inputRef.current?.focus(), 0);
   };
 
   const handleEscape = () => {
     setEditingRecord(null);
     setInputValue('');
     setSearchQuery('');
+    // Focus input after escape/clear
+    setTimeout(() => inputRef.current?.focus(), 0);
   };
 
   const handleTagClick = (tag: string) => {
@@ -107,6 +113,8 @@ const Index = () => {
       title: "Record deleted",
       description: "The record has been removed.",
     });
+    // Focus input after delete
+    setTimeout(() => inputRef.current?.focus(), 0);
   };
 
   return (

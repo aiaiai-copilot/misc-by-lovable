@@ -66,6 +66,10 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
 
   const handleClear = () => {
     onChange('');
+    // Refocus the input after clearing
+    if (ref && 'current' in ref && ref.current) {
+      ref.current.focus();
+    }
   };
 
   return (
