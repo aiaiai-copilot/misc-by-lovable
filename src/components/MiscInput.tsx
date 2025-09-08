@@ -34,7 +34,7 @@ export const MiscInput = ({
     if (e.key === 'Escape') {
       e.preventDefault();
       
-      // Clear last tag or partial tag
+      // Serial deletion of last tags
       const trimmedValue = value.trim();
       if (!trimmedValue) {
         // No content, call original escape behavior
@@ -42,12 +42,14 @@ export const MiscInput = ({
         return;
       }
       
-      const lastSpaceIndex = value.lastIndexOf(' ');
-      if (lastSpaceIndex >= 0) {
-        // Remove everything after the last space (partial or complete tag)
-        onChange(value.substring(0, lastSpaceIndex + 1));
+      // Find the last complete tag by splitting and removing the last one
+      const tags = trimmedValue.split(/\s+/).filter(Boolean);
+      if (tags.length > 1) {
+        // Remove last complete tag, keep space after remaining tags
+        const remainingTags = tags.slice(0, -1);
+        onChange(remainingTags.join(' ') + ' ');
       } else {
-        // No spaces, clear entire input
+        // Only one tag left, clear it completely
         onChange('');
       }
     }
