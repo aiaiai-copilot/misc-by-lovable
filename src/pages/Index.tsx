@@ -131,16 +131,13 @@ const Index = () => {
         )}
 
         {showRecordsList && (
-          <div>
-            <h2 className="text-xl font-light text-center mb-6">Поиск - список записей</h2>
-            <div className="results-area">
-              <RecordsList
-                records={filteredRecords}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-                searchQuery={inputValue}
-              />
-            </div>
+          <div className="results-area">
+            <RecordsList
+              records={filteredRecords}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              searchQuery={inputValue}
+            />
           </div>
         )}
 
