@@ -176,6 +176,10 @@ All colors MUST be HSL.
     margin-top: 2rem;
   }
   
+  .results-area * {
+    color: hsl(var(--background)) !important;
+  }
+  
   .results-area .record-item {
     border-bottom: 1px solid hsl(var(--background) / 0.2);
   }
@@ -185,6 +189,6 @@ All colors MUST be HSL.
   }
   
   .results-area .tag-cloud-item:hover {
-    color: hsl(var(--background));
+    color: hsl(var(--background)) !important;
   }
 }
