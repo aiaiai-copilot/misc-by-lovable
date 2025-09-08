@@ -31,10 +31,8 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, [inputValue, setSearchQuery]);
 
-  // Determine display mode
-  const showTagCloud = filteredRecords.length > 12;
-  const showRecordsList = !showTagCloud && filteredRecords.length > 0;
-  const showEmptyState = filteredRecords.length === 0;
+  // Determine what to show
+  const hasData = filteredRecords.length > 0 || Object.keys(tagFrequencies).length > 0;
 
   const handleSubmit = (tags: string[]) => {
     if (editingRecord) {
@@ -118,30 +116,44 @@ const Index = () => {
           )}
         </div>
 
-        {/* Display Modes */}
-        <div className="results-area">
-          {showRecordsList && (
-            <RecordsList
-              records={filteredRecords}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          )}
+        {/* Search Results */}
+        {hasData ? (
+          <div className="space-y-12">
+            {/* Tag Cloud Section */}
+            {Object.keys(tagFrequencies).length > 0 && (
+              <div>
+                <h2 className="text-xl font-light text-center mb-6">Search - Tag Cloud</h2>
+                <div className="results-area">
+                  <TagCloud
+                    tagFrequencies={tagFrequencies}
+                    onTagClick={handleTagClick}
+                  />
+                </div>
+              </div>
+            )}
 
-          {showTagCloud && (
-            <TagCloud
-              tagFrequencies={tagFrequencies}
-              onTagClick={handleTagClick}
-            />
-          )}
-
-          {showEmptyState && !inputValue.trim() && (
+            {/* Records List Section */}
+            {filteredRecords.length > 0 && (
+              <div>
+                <h2 className="text-xl font-light text-center mb-6">Search - Records List</h2>
+                <div className="results-area">
+                  <RecordsList
+                    records={filteredRecords}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          !inputValue.trim() && (
             <div className="text-center py-16">
-              <div className="text-lg">No records yet</div>
-              <div className="text-sm mt-2 opacity-70">Start by typing some tags above</div>
+              <div className="text-lg text-muted-foreground">No records yet</div>
+              <div className="text-sm mt-2 text-muted-foreground/70">Start by typing some tags above</div>
             </div>
-          )}
-        </div>
+          )
+        )}
       </div>
     </div>
   );
