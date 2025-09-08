@@ -106,31 +106,31 @@ export const RecordsList = forwardRef<RecordsListRef, RecordsListProps>(({ recor
           key={record.id}
           ref={el => itemRefs.current[index] = el}
           className={cn(
-            "record-item px-4 py-3 cursor-pointer group relative border rounded focus:outline-none focus:ring-2 focus:ring-ring",
+            "record-item px-4 py-3 pr-12 cursor-pointer group relative border rounded focus:outline-none focus:ring-2 focus:ring-ring",
             editingId === record.id && "bg-muted"
           )}
           onClick={() => handleRecordClick(record)}
           onKeyDown={(e) => handleKeyDown(e, index)}
           tabIndex={-1}
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center">
             <div className="flex-1">
               <div className="text-foreground text-sm">
                 {highlightTags(record.tags, searchTerms)}
               </div>
             </div>
-            
-            <button
-              className="delete-button text-destructive hover:text-destructive/80 p-1 ml-4"
-              onClick={(e) => {
-                e.stopPropagation();
-                onDelete(record.id);
-              }}
-              aria-label="Delete record"
-            >
-              <X size={16} />
-            </button>
           </div>
+          
+          <button
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(record.id);
+            }}
+            aria-label="Delete record"
+          >
+            <X size={16} />
+          </button>
         </div>
       ))}
     </div>
