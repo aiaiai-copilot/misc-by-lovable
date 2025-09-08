@@ -38,7 +38,7 @@ export const MiscInput = ({
   };
 
   return (
-    <div className={cn("relative w-full max-w-2xl mx-auto", className)}>
+    <div className={cn("relative w-full", className)}>
       <input
         ref={inputRef}
         type="text"
@@ -46,7 +46,7 @@ export const MiscInput = ({
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="underline-input w-full text-center"
+        className="calculator-input w-full text-center"
         autoFocus
       />
     </div>

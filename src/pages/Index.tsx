@@ -100,7 +100,7 @@ const Index = () => {
         </div>
 
         {/* Input Field */}
-        <div className="mb-12">
+        <div className="mb-4 w-full max-w-6xl mx-auto">
           <MiscInput
             value={inputValue}
             onChange={setInputValue}
@@ -108,6 +108,7 @@ const Index = () => {
             onEscape={handleEscape}
             allTags={allTags}
             placeholder={editingRecord ? "Edit tags..." : "Enter tags separated by spaces..."}
+            className="w-full"
           />
           
           {editingRecord && (
