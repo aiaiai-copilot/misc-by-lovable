@@ -162,9 +162,14 @@ All colors MUST be HSL.
   }
   
   .autocomplete-dropdown {
-    background: hsl(var(--popover) / 0.1);
+    background: hsl(var(--muted-foreground) / 0.8);
     backdrop-filter: blur(2px);
     border: 1px solid hsl(var(--border) / 0.2);
     box-shadow: 0 1px 4px hsl(var(--foreground) / 0.03);
+    color: hsl(var(--background));
+  }
+  
+  .autocomplete-dropdown button:hover {
+    background: hsl(var(--background) / 0.2);
   }
 }
