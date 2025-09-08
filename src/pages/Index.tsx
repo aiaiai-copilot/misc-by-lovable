@@ -119,27 +119,29 @@ const Index = () => {
         </div>
 
         {/* Display Modes */}
-        {showRecordsList && (
-          <RecordsList
-            records={filteredRecords}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
-        )}
+        <div className="results-area">
+          {showRecordsList && (
+            <RecordsList
+              records={filteredRecords}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          )}
 
-        {showTagCloud && (
-          <TagCloud
-            tagFrequencies={tagFrequencies}
-            onTagClick={handleTagClick}
-          />
-        )}
+          {showTagCloud && (
+            <TagCloud
+              tagFrequencies={tagFrequencies}
+              onTagClick={handleTagClick}
+            />
+          )}
 
-        {showEmptyState && !inputValue.trim() && (
-          <div className="text-center py-16">
-            <div className="text-muted-foreground text-lg">No records yet</div>
-            <div className="text-muted-foreground text-sm mt-2">Start by typing some tags above</div>
-          </div>
-        )}
+          {showEmptyState && !inputValue.trim() && (
+            <div className="text-center py-16">
+              <div className="text-lg">No records yet</div>
+              <div className="text-sm mt-2 opacity-70">Start by typing some tags above</div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

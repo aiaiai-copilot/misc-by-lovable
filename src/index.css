@@ -162,14 +162,29 @@ All colors MUST be HSL.
   }
   
   .autocomplete-dropdown {
-    background: hsl(var(--muted-foreground) / 0.8);
+    background: hsl(var(--popover) / 0.1);
     backdrop-filter: blur(2px);
     border: 1px solid hsl(var(--border) / 0.2);
     box-shadow: 0 1px 4px hsl(var(--foreground) / 0.03);
-    color: hsl(var(--background));
   }
   
-  .autocomplete-dropdown button:hover {
-    background: hsl(var(--background) / 0.2);
+  .results-area {
+    background: hsl(var(--muted-foreground));
+    color: hsl(var(--background));
+    padding: 2rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+  }
+  
+  .results-area .record-item {
+    border-bottom: 1px solid hsl(var(--background) / 0.2);
+  }
+  
+  .results-area .record-item:hover {
+    background-color: hsl(var(--background) / 0.1);
+  }
+  
+  .results-area .tag-cloud-item:hover {
+    color: hsl(var(--background));
   }
 }
