@@ -39,9 +39,24 @@ export const useRecords = () => {
     const searchTags = searchQuery.toLowerCase().split(/\s+/).filter(Boolean);
     return sorted.filter(record => {
       const recordTags = record.tags.map(tag => tag.toLowerCase());
-      return searchTags.every(searchTag =>
+      
+      // All complete tags (all but the last) must be exact matches
+      const completeTags = searchTags.slice(0, -1);
+      const incompleteTag = searchTags[searchTags.length - 1];
+      
+      // Check complete tags first
+      const completeTagsMatch = completeTags.every(searchTag =>
         recordTags.includes(searchTag)
       );
+      
+      if (!completeTagsMatch) return false;
+      
+      // Check incomplete tag with prefix matching
+      const incompleteTagMatch = recordTags.some(recordTag =>
+        recordTag.startsWith(incompleteTag)
+      );
+      
+      return incompleteTagMatch;
     });
   }, [records, searchQuery]);
 
