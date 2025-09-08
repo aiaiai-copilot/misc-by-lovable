@@ -120,12 +120,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-light text-foreground mb-2">MISC</h1>
-          <p className="text-muted-foreground text-sm">Everything is tags</p>
-        </div>
-
         {/* Input Field */}
         <div className="mb-4 w-full max-w-6xl mx-auto">
           <MiscInput
