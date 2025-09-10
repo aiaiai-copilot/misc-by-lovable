@@ -37,8 +37,8 @@ const Index = () => {
   }, [inputValue, setSearchQuery]);
 
   // Determine display mode based on search state
-  const showTagCloud = !inputValue.trim() || filteredRecords.length > 12;
-  const showRecordsList = inputValue.trim() && filteredRecords.length > 0 && filteredRecords.length <= 12;
+  const showTagCloud = filteredRecords.length > 12;
+  const showRecordsList = filteredRecords.length > 0 && filteredRecords.length <= 12;
   const showCreateState = inputValue.trim() && filteredRecords.length === 0;
   const showEmptyState = !inputValue.trim() && filteredRecords.length === 0;
 
