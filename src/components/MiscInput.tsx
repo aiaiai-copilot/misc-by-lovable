@@ -75,7 +75,7 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
   };
 
   return (
-    <div className={cn("relative w-full border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden", className)} style={{ borderColor: '#A9A9A9' }}>
+    <div className={cn("relative w-full border-8 rounded-md bg-background shadow-inner overflow-hidden", className)} style={{ borderColor: '#A9A9A9', borderLeftWidth: '48px' }}>
       <div className="flex items-stretch">
         <input
           ref={ref}
