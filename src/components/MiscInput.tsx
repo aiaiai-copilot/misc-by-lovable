@@ -88,7 +88,7 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
           autoFocus
         />
         {toolbar && (
-          <div className="flex items-center gap-1 px-2 h-full self-stretch" style={{ backgroundColor: '#A9A9A9' }}>
+          <div className="flex items-center gap-1 px-2" style={{ backgroundColor: '#A9A9A9', minHeight: '100%' }}>
             {value.trim() && (
               <button
                 onClick={handleClear}
