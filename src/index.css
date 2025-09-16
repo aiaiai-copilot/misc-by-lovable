@@ -156,7 +156,7 @@ All colors MUST be HSL.
     background: hsl(var(--muted));
     color: hsl(var(--foreground));
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 0px;
     border: 1px solid hsl(var(--border));
     font-size: 14px;
     font-weight: 500;
@@ -165,7 +165,6 @@ All colors MUST be HSL.
   .tag-cloud-item:hover {
     background: hsl(var(--accent));
     color: hsl(var(--accent-foreground));
-    transform: translateY(-1px);
   }
   
   .autocomplete-dropdown {
