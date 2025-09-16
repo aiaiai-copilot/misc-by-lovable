@@ -118,15 +118,15 @@ export const TagCloud = forwardRef<TagCloudRef, TagCloudProps>(({ tagFrequencies
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9' }}>
-      <div className="p-4 bg-muted">
+    <div className="w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9', backgroundColor: '#A9A9A9' }}>
+      <div className="p-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2">
         {tagFrequencies.slice(0, 50).map((item, index) => (
           <button
             key={item.tag}
             ref={el => buttonRefs.current[index] = el}
             className={cn(
-              "tag-cloud-item text-center",
+              "tag-cloud-item text-center bg-background",
               getTagSize(item.count)
             )}
             onClick={() => onTagClick(item.tag)}

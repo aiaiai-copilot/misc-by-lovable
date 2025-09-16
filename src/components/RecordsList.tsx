@@ -100,14 +100,14 @@ export const RecordsList = forwardRef<RecordsListRef, RecordsListProps>(({ recor
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9' }}>
-      <div className="space-y-2 p-4 bg-muted">
+    <div className="w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9', backgroundColor: '#A9A9A9' }}>
+      <div className="space-y-2 p-4">
         {records.slice(0, 12).map((record, index) => (
         <div
           key={record.id}
           ref={el => itemRefs.current[index] = el}
           className={cn(
-            "record-item px-4 py-3 pr-12 cursor-pointer group relative border rounded focus:outline-none focus:ring-2 focus:ring-ring",
+            "record-item px-4 py-3 pr-12 cursor-pointer group relative border rounded focus:outline-none focus:ring-2 focus:ring-ring bg-background",
             editingId === record.id && "bg-muted"
           )}
           onClick={() => handleRecordClick(record)}
