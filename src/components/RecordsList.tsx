@@ -101,7 +101,7 @@ export const RecordsList = forwardRef<RecordsListRef, RecordsListProps>(({ recor
 
   return (
     <div className="w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9' }}>
-      <div className="space-y-2 p-4">
+      <div className="space-y-2 p-4 bg-muted">
         {records.slice(0, 12).map((record, index) => (
         <div
           key={record.id}
