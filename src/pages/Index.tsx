@@ -131,7 +131,7 @@ const Index = () => {
           onNavigateDown={handleNavigateToResults}
           allTags={allTags}
           placeholder={editingRecord ? "Edit tags..." : "Enter tags separated by spaces..."}
-          className="w-full max-w-4xl mx-auto mb-4"
+          className="w-full max-w-4xl mx-auto"
           toolbar={<DataManagement />}
         />
 
