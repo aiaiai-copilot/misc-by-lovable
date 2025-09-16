@@ -50,27 +50,24 @@ export const DataManagement = () => {
 
   return (
     <>
-      {/* Minimal corner buttons */}
-      <div className="absolute top-4 right-4 flex gap-1">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="h-8 w-8 text-muted-foreground hover:text-foreground"
-          onClick={() => setShowExport(true)}
-          title="Export data"
-        >
-          <Download className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="h-8 w-8 text-muted-foreground hover:text-foreground"
-          onClick={() => setShowImport(true)}
-          title="Import data"
-        >
-          <Upload className="h-4 w-4" />
-        </Button>
-      </div>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="h-8 w-8 text-muted-foreground hover:text-foreground"
+        onClick={() => setShowExport(true)}
+        title="Export data"
+      >
+        <Download className="h-4 w-4" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="h-8 w-8 text-muted-foreground hover:text-foreground"
+        onClick={() => setShowImport(true)}
+        title="Import data"
+      >
+        <Upload className="h-4 w-4" />
+      </Button>
 
       {/* Export Dialog */}
       <Dialog open={showExport} onOpenChange={setShowExport}>
