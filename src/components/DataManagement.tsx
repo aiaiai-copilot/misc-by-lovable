@@ -56,7 +56,7 @@ export const DataManagement = () => {
         type="button"
         title="Export data"
       >
-        <Download size={16} className="text-white hover:text-gray-200" />
+        <Download size={16} className="text-gray-900 hover:text-gray-700" />
       </button>
       <button
         onClick={() => setShowImport(true)}
@@ -64,7 +64,7 @@ export const DataManagement = () => {
         type="button"
         title="Import data"
       >
-        <Upload size={16} className="text-white hover:text-gray-200" />
+        <Upload size={16} className="text-gray-900 hover:text-gray-700" />
       </button>
 
       {/* Export Dialog */}

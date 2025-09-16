@@ -75,8 +75,8 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
   };
 
   return (
-    <div className={cn("relative w-full border-8 border-l-16 rounded-md bg-background shadow-inner")} style={{ borderColor: '#A9A9A9' }}>
-      <div className="flex items-center">
+    <div className={cn("relative w-full border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden")} style={{ borderColor: '#A9A9A9' }}>
+      <div className="flex items-center h-full">
         <input
           ref={ref}
           type="text"
@@ -88,7 +88,7 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
           autoFocus
         />
         {toolbar && (
-          <div className="flex items-center gap-1 px-2 py-2 border-l" style={{ borderColor: '#A9A9A9', backgroundColor: '#A9A9A9' }}>
+          <div className="flex items-center gap-1 px-2 py-2 h-full" style={{ backgroundColor: '#A9A9A9' }}>
             {value.trim() && (
               <button
                 onClick={handleClear}
@@ -96,7 +96,7 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
                 type="button"
                 title="Clear input"
               >
-                <X size={16} className="text-white hover:text-gray-200" />
+                <X size={16} className="text-gray-900 hover:text-gray-700" />
               </button>
             )}
             {toolbar}
