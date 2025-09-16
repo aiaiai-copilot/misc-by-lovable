@@ -163,7 +163,7 @@ const Index = () => {
         )}
 
         {showCreateState && (
-          <div className="results-area">
+          <div className="results-area w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9' }}>
             <div className="text-center py-16">
               <div className="text-lg text-muted-foreground">No records found</div>
               <div className="text-sm mt-2 text-muted-foreground/70">Press Enter to create a new record</div>
@@ -172,7 +172,7 @@ const Index = () => {
         )}
 
         {showEmptyState && (
-          <div className="text-center py-16">
+          <div className="text-center py-16 w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9' }}>
             <div className="text-lg text-muted-foreground">No records yet</div>
             <div className="text-sm mt-2 text-muted-foreground/70">Start by typing some tags above</div>
           </div>
