@@ -96,7 +96,7 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
                 type="button"
                 title="Clear input"
               >
-                <X size={16} className="text-white hover:text-gray-200" />
+                <X size={16} className="text-gray-800 hover:text-gray-600" />
               </button>
             )}
             {toolbar}
