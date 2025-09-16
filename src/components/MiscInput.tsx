@@ -75,7 +75,7 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
   };
 
   return (
-    <div className={cn("relative w-full border-8 border-l-16 border-gray-600 dark:border-gray-700 rounded-md bg-background shadow-inner", className)}>
+    <div className={cn("relative w-full border-8 border-l-16 rounded-md bg-background shadow-inner")} style={{ borderColor: '#A9A9A9' }}>
       <div className="flex items-center">
         <input
           ref={ref}
@@ -88,7 +88,7 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
           autoFocus
         />
         {toolbar && (
-          <div className="flex items-center gap-1 px-2 py-2 border-l border-gray-600 dark:border-gray-700 bg-gray-600 dark:bg-gray-700">
+          <div className="flex items-center gap-1 px-2 py-2 border-l" style={{ borderColor: '#A9A9A9', backgroundColor: '#A9A9A9' }}>
             {value.trim() && (
               <button
                 onClick={handleClear}

@@ -50,24 +50,22 @@ export const DataManagement = () => {
 
   return (
     <>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="h-8 w-8 text-white hover:text-gray-200"
+      <button
         onClick={() => setShowExport(true)}
+        className="p-1 rounded-full hover:bg-muted transition-colors"
+        type="button"
         title="Export data"
       >
-        <Download className="h-4 w-4" />
-      </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="h-8 w-8 text-white hover:text-gray-200"
+        <Download size={16} className="text-white hover:text-gray-200" />
+      </button>
+      <button
         onClick={() => setShowImport(true)}
+        className="p-1 rounded-full hover:bg-muted transition-colors"
+        type="button"
         title="Import data"
       >
-        <Upload className="h-4 w-4" />
-      </Button>
+        <Upload size={16} className="text-white hover:text-gray-200" />
+      </button>
 
       {/* Export Dialog */}
       <Dialog open={showExport} onOpenChange={setShowExport}>
