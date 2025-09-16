@@ -75,7 +75,7 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
   };
 
   return (
-    <div className={cn("relative w-full border border-border rounded-md bg-background", className)}>
+    <div className={cn("relative w-full border-2 border-gray-400 dark:border-gray-600 rounded-md bg-background shadow-inner", className)}>
       <div className="flex items-center">
         <input
           ref={ref}
