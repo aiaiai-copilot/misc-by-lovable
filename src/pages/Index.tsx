@@ -5,6 +5,7 @@ import { RecordsList, type RecordsListRef } from '@/components/RecordsList';
 import { TagCloud, type TagCloudRef } from '@/components/TagCloud';
 import { Record } from '@/types/Record';
 import { useToast } from '@/hooks/use-toast';
+import { DataManagement } from '@/components/DataManagement';
 
 const Index = () => {
   const {
@@ -118,7 +119,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <DataManagement />
       <div className="container mx-auto px-4 py-8">
         {/* Input Field */}
         <div className="mb-4 w-full max-w-6xl mx-auto">

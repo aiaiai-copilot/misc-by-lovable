@@ -120,6 +120,27 @@ export const useRecords = () => {
     setRecords(prev => prev.filter(record => record.id !== id));
   };
 
+  const exportData = () => {
+    return records;
+  };
+
+  const importData = (data: any[]): boolean => {
+    try {
+      const importedRecords = data.map((record: any) => ({
+        ...record,
+        id: record.id || crypto.randomUUID(),
+        createdAt: new Date(record.createdAt),
+        updatedAt: new Date(record.updatedAt),
+      }));
+      
+      setRecords(importedRecords);
+      return true;
+    } catch (error) {
+      console.error('Failed to import data:', error);
+      return false;
+    }
+  };
+
   return {
     records,
     filteredRecords,
@@ -130,5 +151,7 @@ export const useRecords = () => {
     createRecord,
     updateRecord,
     deleteRecord,
+    exportData,
+    importData,
   };
 };
