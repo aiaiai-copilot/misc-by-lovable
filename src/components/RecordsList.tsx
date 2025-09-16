@@ -123,7 +123,7 @@ export const RecordsList = forwardRef<RecordsListRef, RecordsListProps>(({ recor
           </div>
           
           <button
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-none hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
             onClick={(e) => {
               e.stopPropagation();
               onDelete(record.id);

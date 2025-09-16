@@ -52,7 +52,7 @@ export const DataManagement = () => {
     <>
       <button
         onClick={() => setShowExport(true)}
-        className="p-1 rounded-full hover:bg-muted transition-colors"
+        className="p-1 rounded-none hover:bg-muted transition-colors"
         type="button"
         title="Export data"
       >
@@ -60,7 +60,7 @@ export const DataManagement = () => {
       </button>
       <button
         onClick={() => setShowImport(true)}
-        className="p-1 rounded-full hover:bg-muted transition-colors"
+        className="p-1 rounded-none hover:bg-muted transition-colors"
         type="button"
         title="Import data"
       >

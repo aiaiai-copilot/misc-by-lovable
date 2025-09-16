@@ -92,7 +92,7 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
             {value.trim() && (
               <button
                 onClick={handleClear}
-                className="p-1 rounded-full hover:bg-muted transition-colors"
+                className="p-1 rounded-none hover:bg-muted transition-colors"
                 type="button"
                 title="Clear input"
               >
