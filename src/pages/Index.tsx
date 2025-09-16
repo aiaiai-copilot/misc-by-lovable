@@ -6,7 +6,6 @@ import { TagCloud, type TagCloudRef } from '@/components/TagCloud';
 import { Record } from '@/types/Record';
 import { useToast } from '@/hooks/use-toast';
 import { DataManagement } from '@/components/DataManagement';
-import { Toolbar } from '@/components/Toolbar';
 
 const Index = () => {
   const {
@@ -122,14 +121,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
-        {/* Toolbar */}
-        <div className="w-full max-w-6xl mx-auto">
-          <Toolbar>
-            <DataManagement />
-          </Toolbar>
-        </div>
-        
-        {/* Input Field */}
+        {/* Input Field with integrated toolbar */}
         <div className="mb-4 w-full max-w-6xl mx-auto">
           <MiscInput
             ref={inputRef}
@@ -141,6 +133,7 @@ const Index = () => {
             allTags={allTags}
             placeholder={editingRecord ? "Edit tags..." : "Enter tags separated by spaces..."}
             className="w-full"
+            toolbar={<DataManagement />}
           />
         </div>
 

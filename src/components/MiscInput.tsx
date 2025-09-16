@@ -1,4 +1,4 @@
-import { useRef, KeyboardEvent, forwardRef } from 'react';
+import React, { useRef, KeyboardEvent, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 import { X } from 'lucide-react';
 
@@ -11,6 +11,7 @@ interface MiscInputProps {
   placeholder?: string;
   allTags: string[];
   className?: string;
+  toolbar?: React.ReactNode;
 }
 
 export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
@@ -21,7 +22,8 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
   onNavigateDown,
   placeholder = "Enter tags separated by spaces...",
   allTags,
-  className
+  className,
+  toolbar
 }, ref) => {
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -73,26 +75,34 @@ export const MiscInput = forwardRef<HTMLInputElement, MiscInputProps>(({
   };
 
   return (
-    <div className={cn("relative w-full", className)}>
-      <input
-        ref={ref}
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder={placeholder}
-        className="calculator-input w-full text-center pr-10"
-        autoFocus
-      />
-      {value.trim() && (
-        <button
-          onClick={handleClear}
-          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-muted transition-colors"
-          type="button"
-        >
-          <X size={16} className="text-muted-foreground hover:text-foreground" />
-        </button>
-      )}
+    <div className={cn("relative w-full border border-border rounded-md bg-background", className)}>
+      <div className="flex items-center">
+        <input
+          ref={ref}
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          className="calculator-input flex-1 text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+          autoFocus
+        />
+        {toolbar && (
+          <div className="flex items-center gap-1 px-2 py-2 border-l border-border bg-muted/30">
+            {value.trim() && (
+              <button
+                onClick={handleClear}
+                className="p-1 rounded-full hover:bg-muted transition-colors"
+                type="button"
+                title="Clear input"
+              >
+                <X size={16} className="text-muted-foreground hover:text-foreground" />
+              </button>
+            )}
+            {toolbar}
+          </div>
+        )}
+      </div>
     </div>
   );
 });
