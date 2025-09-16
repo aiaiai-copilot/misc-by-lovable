@@ -53,7 +53,7 @@ export const DataManagement = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="h-8 w-8 text-muted-foreground hover:text-foreground"
+        className="h-8 w-8 text-white hover:text-gray-200"
         onClick={() => setShowExport(true)}
         title="Export data"
       >
@@ -62,7 +62,7 @@ export const DataManagement = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="h-8 w-8 text-muted-foreground hover:text-foreground"
+        className="h-8 w-8 text-white hover:text-gray-200"
         onClick={() => setShowImport(true)}
         title="Import data"
       >
