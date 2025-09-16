@@ -122,48 +122,41 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         {/* Input Field with integrated toolbar */}
-        <div className="mb-4 w-full max-w-6xl mx-auto">
-          <MiscInput
-            ref={inputRef}
-            value={inputValue}
-            onChange={setInputValue}
-            onSubmit={handleSubmit}
-            onEscape={handleEscape}
-            onNavigateDown={handleNavigateToResults}
-            allTags={allTags}
-            placeholder={editingRecord ? "Edit tags..." : "Enter tags separated by spaces..."}
-            className="w-full"
-            toolbar={<DataManagement />}
-          />
-        </div>
+        <MiscInput
+          ref={inputRef}
+          value={inputValue}
+          onChange={setInputValue}
+          onSubmit={handleSubmit}
+          onEscape={handleEscape}
+          onNavigateDown={handleNavigateToResults}
+          allTags={allTags}
+          placeholder={editingRecord ? "Edit tags..." : "Enter tags separated by spaces..."}
+          className="w-full max-w-4xl mx-auto mb-4"
+          toolbar={<DataManagement />}
+        />
 
-        {/* Display based on state */}
         {showTagCloud && (
-          <div className="results-area">
-            <TagCloud
-              ref={tagCloudRef}
-              tagFrequencies={tagFrequencies}
-              onTagClick={handleTagClick}
-              onNavigateUp={handleNavigateToInput}
-            />
-          </div>
+          <TagCloud
+            ref={tagCloudRef}
+            tagFrequencies={tagFrequencies}
+            onTagClick={handleTagClick}
+            onNavigateUp={handleNavigateToInput}
+          />
         )}
 
         {showRecordsList && (
-          <div className="results-area">
-            <RecordsList
-              ref={recordsListRef}
-              records={filteredRecords}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              onNavigateUp={handleNavigateToInput}
-              searchQuery={inputValue}
-            />
-          </div>
+          <RecordsList
+            ref={recordsListRef}
+            records={filteredRecords}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onNavigateUp={handleNavigateToInput}
+            searchQuery={inputValue}
+          />
         )}
 
         {showCreateState && (
-          <div className="results-area w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9' }}>
+          <div className="w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9' }}>
             <div className="text-center py-16">
               <div className="text-lg text-muted-foreground">No records found</div>
               <div className="text-sm mt-2 text-muted-foreground/70">Press Enter to create a new record</div>
@@ -172,9 +165,11 @@ const Index = () => {
         )}
 
         {showEmptyState && (
-          <div className="text-center py-16 w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9' }}>
-            <div className="text-lg text-muted-foreground">No records yet</div>
-            <div className="text-sm mt-2 text-muted-foreground/70">Start by typing some tags above</div>
+          <div className="w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md bg-background shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9' }}>
+            <div className="text-center py-16">
+              <div className="text-lg text-muted-foreground">No records yet</div>
+              <div className="text-sm mt-2 text-muted-foreground/70">Start by typing some tags above</div>
+            </div>
           </div>
         )}
       </div>
