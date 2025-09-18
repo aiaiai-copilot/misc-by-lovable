@@ -100,7 +100,7 @@ export const RecordsList = forwardRef<RecordsListRef, RecordsListProps>(({ recor
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9', backgroundColor: '#DCDCDC' }}>
+    <div className="w-full max-w-4xl mx-auto border border-border rounded-lg shadow-lg bg-card/50 backdrop-blur-sm overflow-hidden">
       <div className="space-y-2 p-4">
         {records.slice(0, 12).map((record, index) => (
         <div

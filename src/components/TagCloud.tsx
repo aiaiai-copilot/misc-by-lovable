@@ -118,7 +118,7 @@ export const TagCloud = forwardRef<TagCloudRef, TagCloudProps>(({ tagFrequencies
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto border-8 border-l-16 rounded-md shadow-inner overflow-hidden" style={{ borderColor: '#A9A9A9', backgroundColor: '#DCDCDC' }}>
+    <div className="w-full max-w-4xl mx-auto border border-border rounded-lg shadow-lg bg-card/50 backdrop-blur-sm overflow-hidden">
       <div className="p-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2">
         {tagFrequencies.slice(0, 50).map((item, index) => (
