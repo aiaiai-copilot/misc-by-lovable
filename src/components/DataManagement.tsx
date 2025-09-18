@@ -1,7 +1,13 @@
 import { useState } from 'react';
-import { Download, Upload, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { useRecords } from '@/hooks/useRecords';
 import { useToast } from '@/hooks/use-toast';
 
@@ -50,22 +56,25 @@ export const DataManagement = () => {
 
   return (
     <>
-      <button
-        onClick={() => setShowExport(true)}
-        className="p-1 rounded-none hover:bg-muted transition-colors"
-        type="button"
-        title="Export data"
-      >
-        <Download size={16} className="text-gray-900 hover:text-gray-700" />
-      </button>
-      <button
-        onClick={() => setShowImport(true)}
-        className="p-1 rounded-none hover:bg-muted transition-colors"
-        type="button"
-        title="Import data"
-      >
-        <Upload size={16} className="text-gray-900 hover:text-gray-700" />
-      </button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            className="p-1 rounded-none hover:bg-muted transition-colors"
+            type="button"
+            title="Menu"
+          >
+            <Menu size={16} className="text-gray-900 hover:text-gray-700" />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => setShowExport(true)}>
+            Export
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setShowImport(true)}>
+            Import
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
 
       {/* Export Dialog */}
       <Dialog open={showExport} onOpenChange={setShowExport}>
